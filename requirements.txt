@@ -1,0 +1,4 @@
+streamlink
+feedgen
+pymediainfo
+python-slugify

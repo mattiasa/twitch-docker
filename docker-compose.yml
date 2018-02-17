@@ -1,0 +1,11 @@
+version: '2'
+services:
+  twitch:
+    build: .
+    volumes:
+      - ./config:/config
+      - /mattiasa/public_html/podcast:/videos
+    working_dir: /videos
+    environment:
+      - BASEURL=http://vimes.coloti.se/~mattiasa/podcast/
+      - XDG_CONFIG_HOME=/config
