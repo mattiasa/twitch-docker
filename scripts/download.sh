@@ -10,13 +10,15 @@ usage() {
     exit 1
 }
 
-if [ "X$filename" = "X" -o "X$url" = "X" ]; then
+if [ "X$url" = "X" ]; then
    usage
 fi
 
 cd /videos
 
-filename=$(getfilename.py $url)
+if [ "X$filename" = "X" ]; then
+    filename=$(getfilename.py $url)
+fi
 
 streamlink -o $filename.ts $url best
 ffmpeg -i $filename.ts media/$filename.mp4
