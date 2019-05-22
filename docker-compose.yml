@@ -4,8 +4,16 @@ services:
     build: .
     volumes:
       - ./config:/config
-      - /mattiasa/public_html/podcast:/videos
+      - videos:/videos
+#      - /mattiasa/public_html/podcast:/videos
     working_dir: /videos
     environment:
       - BASEURL=http://vimes.coloti.se/~mattiasa/podcast/
       - XDG_CONFIG_HOME=/config
+volumes:
+  videos:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: vers=3.02,user=${USERNAME},pass=${PASSWORD}
+      device: "//10.237.237.9/mattiasa/public_html/podcast"

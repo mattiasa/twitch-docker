@@ -2,3 +2,6 @@ streamlink
 feedgen
 pymediainfo
 python-slugify
+lxml
+requests
+beautifulsoup

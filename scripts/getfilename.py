@@ -5,30 +5,36 @@ import sys
 import lxml
 import lxml.html.soupparser
 import re
+import os
 import datetime
-
 from slugify import slugify
 
-url=sys.argv[1]
+import urlparse
 
-r = requests.get(url)
+twitch_url=sys.argv[1]
 
-root = lxml.html.soupparser.fromstring(r.content, features="html.parser")
+client_id = '9avyvoskgvc2bi0uantgyesqgxtj14'
 
-title = root.xpath('//meta[@property="og:title"]')
-if title:
-    title = title[0]
+template_url = "https://api.twitch.tv/kraken/videos/v{video_id}"
 
-release_date = root.xpath('//meta[@property="og:video:release_date"]')
-if release_date:
-    release_date = release_date[0]
+video_id = os.path.basename(urlparse.urlparse(twitch_url).path)
 
-if release_date:
-    release_date = release_date.attrib['content']
-else:
+
+r = requests.get(template_url.format(video_id=video_id), headers={'client-id': client_id})
+
+r.raise_for_status()
+
+response = r.json()
+
+title = response.get('title')
+release_date = response.get('recorded_at')
+
+if not title:
+    title = "no title"
+
+if not release_date:
     release_date = datetime.datetime.now().strftime("%H-%M-%S")
 
-title = title.attrib['content']
-release_date = re.sub('T.*', '', release_date)
+release_date = re.sub(':', '-', release_date)
 
 print "{}-{}".format(release_date, slugify(title))

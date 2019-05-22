@@ -1,6 +1,6 @@
-FROM jrottenberg/ffmpeg:3.3
+FROM jrottenberg/ffmpeg:4.0
 
-RUN apt-get update && apt-get install -y wget python python-pip python-lxml python-requests python-beautifulsoup && apt-get clean
+RUN apt-get update && apt-get install -y wget python libssl-dev python-pip && apt-get clean
 
 ADD requirements.txt /
 
