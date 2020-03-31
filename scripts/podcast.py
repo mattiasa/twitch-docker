@@ -19,7 +19,7 @@ fg = FeedGenerator()
 fg.load_extension('podcast')
 
 fg.podcast.itunes_category('Technology', 'Podcasting')
-fg.title("Mattias Vimes")
+fg.title("Mattias Internal")
 fg.logo(baseurl + "logo.jpg")
 fg.link(href=baseurl + "podcast.xml")
 fg.description("Mattias Vimes")

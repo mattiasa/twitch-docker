@@ -20,7 +20,10 @@ template_url = "https://api.twitch.tv/kraken/videos/v{video_id}"
 video_id = os.path.basename(urlparse.urlparse(twitch_url).path)
 
 
-r = requests.get(template_url.format(video_id=video_id), headers={'client-id': client_id})
+r = requests.get(template_url.format(video_id=video_id), headers={
+    'client-id': client_id,
+    'accept': 'application/vnd.twitchtv.v5+json'
+})
 
 r.raise_for_status()
 

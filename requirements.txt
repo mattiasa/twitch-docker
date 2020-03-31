@@ -1,4 +1,4 @@
-streamlink
+streamlink==1.2.0
 feedgen
 pymediainfo
 python-slugify

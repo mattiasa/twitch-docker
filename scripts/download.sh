@@ -22,4 +22,4 @@ fi
 
 streamlink -o $filename.ts $url best
 ffmpeg -i $filename.ts media/$filename.mp4
-./podcast.py
+podcast.py
